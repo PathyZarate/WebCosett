@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebCosett")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d0c05dcad98dad5583d1fca180b547e0e17dd93a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dd3279b01dbe3f320f2c6f769f9a44605363af48")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebCosett")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebCosett")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
