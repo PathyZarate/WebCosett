@@ -1,6 +1,0 @@
-@WebCosett_HostAddress = http://localhost:5238
-
-GET {{WebCosett_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
