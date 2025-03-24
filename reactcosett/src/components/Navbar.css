@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #f9f8fc;
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 40px;
+    height: 125px; /* Ajusta la altura del header */
+}
+
+#logo {
+    display: flex;
+    align-items: center;
+}
+
+#logo img {
+    height: 100px; /* Ajusta el tamaño del logo */
+}
+
+nav {
+    padding: 10px 20px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #003262; /* Cambia el color de las letras a azul */
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 22px; /* Aumenta el tamaño de las letras */
+    padding: 10px;
+    border-radius: 5px; /* Esquinas redondeadas */
+    transition: background-color 0.3s, color 0.3s; /* Transición suave */
+}
+
+nav ul li a:hover {
+    background-color: #003262; /* Fondo azul al pasar el mouse */
+    color: white; /* Letras blancas al pasar el mouse */
+}
+
+nav ul li:nth-child(odd) {
+    color: #003262; /* Color azul para los separadores */
+    font-weight: bold;
+    padding: 0 10px; /* Espaciado alrededor del separador */
+}
+
+.separator {
+    color: #003262; /* Color azul para los separadores */
+    font-size: 24px; /* Aumenta el tamaño del separador */
+    font-weight: bold;
+    padding: 0 10px; /* Espaciado alrededor del separador */
+}
+
+
+
+  
