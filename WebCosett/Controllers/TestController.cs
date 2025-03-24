@@ -8,7 +8,7 @@ namespace WebCosett.Controllers
     [ApiController]
     public class TestController : ControllerBase
     {
-        [HttpPost("procesar-archivo")]
+        [HttpPost("procesar-descargarexcel")]
         public async Task<IActionResult> ProcesarArchivo(IFormFile archivo)
         {
             if (archivo == null || archivo.Length == 0)
