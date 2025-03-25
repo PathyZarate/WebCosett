@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebCosett.Data;
 
 namespace WebCosett.Controllers
 {
@@ -8,14 +9,16 @@ namespace WebCosett.Controllers
     public class MostrarController : ControllerBase
     {
         [HttpPost("procesar-archivo")]
-        public async Task<IActionResult> ProcesarArchivo(IFormFile archivo)
+        public async Task<IActionResult> ProcesarArchivo(IFormFile archivo, [FromServices] AppDbContext context)
         {
             if (archivo == null || archivo.Length == 0)
             {
                 return BadRequest("No se ha proporcionado un archivo válido.");
             }
 
-            var registrosProcesados = new List<RegistroLinea>();
+            var nuevoArchivo = new Archivo { Nombre = archivo.FileName };
+            context.Archivo.Add(nuevoArchivo);
+            await context.SaveChangesAsync();
 
             using (var stream = archivo.OpenReadStream())
             using (var reader = new StreamReader(stream))
@@ -24,58 +27,46 @@ namespace WebCosett.Controllers
                 while ((linea = await reader.ReadLineAsync()) != null)
                 {
                     int offset = 0;
-                    var registroLinea = new RegistroLinea();
-                    bool primeraVuelta = true;
+                    var registroLinea = new RegistroLinea
+                    {
+                        ArchivoId = nuevoArchivo.Id,
+                        Fecha = linea.Substring(offset, 8),
+                        Hora = linea.Substring(offset + 8, 5),
+                        Calidad = linea.Substring(offset + 13, 3),
+                        LongitudDatos = linea.Substring(offset + 16, 3),
+                        Registros = new List<DatoRegistro>()
+                    };
 
+                    offset += 19;
                     while (offset < linea.Length)
                     {
-                        if (primeraVuelta)
+                        var dato = new DatoRegistro
                         {
-                            registroLinea.Fecha = linea.Substring(offset, 8);
-                            registroLinea.Hora = linea.Substring(offset + 8, 5);
-                            registroLinea.Calidad = linea.Substring(offset + 13, 3);
-                            registroLinea.LongitudDatos = linea.Substring(offset + 16, 3);
-
-                            primeraVuelta = false;
-                            offset += 19;
-                        }
-                        else
-                        {
-                            registroLinea.Registros = new List<string>
-                        {
-                            linea.Substring(offset, 1),
-                            linea.Substring(offset + 1, 6),
-                            linea.Substring(offset + 7, 1),
-                            linea.Substring(offset + 8, 1),
-                            linea.Substring(offset + 9, 7),
-                            linea.Substring(offset + 16, 7),
-                            linea.Substring(offset + 23, 7),
-                            linea.Substring(offset + 30, 7),
-                            linea.Substring(offset + 37, 7),
-                            linea.Substring(offset + 44, 7),
-                            linea.Substring(offset + 51, 7),
-                            linea.Substring(offset + 58, 7),
-                            linea.Substring(offset + 65, 7)
+                            Valor1 = linea.Substring(offset, 1),
+                            Valor2 = linea.Substring(offset + 1, 6),
+                            Valor3 = linea.Substring(offset + 7, 1),
+                            Valor4 = linea.Substring(offset + 8, 1),
+                            Valor5 = linea.Substring(offset + 9, 7),
+                            Valor6 = linea.Substring(offset + 16, 7),
+                            Valor7 = linea.Substring(offset + 23, 7),
+                            Valor8 = linea.Substring(offset + 30, 7),
+                            Valor9 = linea.Substring(offset + 37, 7),
+                            Valor10 = linea.Substring(offset + 44, 7),
+                            Valor11 = linea.Substring(offset + 51, 7),
+                            Valor12 = linea.Substring(offset + 58, 7),
+                            Valor13 = linea.Substring(offset + 65, 7)
                         };
 
-                            offset += 72;
-                        }
+                        registroLinea.Registros.Add(dato);
+                        offset += 72;
                     }
-                    registrosProcesados.Add(registroLinea);
+
+                    context.RegistroLinea.Add(registroLinea);
                 }
             }
 
-            return Ok(registrosProcesados);
+            await context.SaveChangesAsync();
+            return Ok("Archivo procesado y guardado correctamente.");
         }
-
-    public class RegistroLinea
-    {
-        public string Fecha { get; set; }
-        public string Hora { get; set; }
-        public string Calidad { get; set; }
-        public string LongitudDatos { get; set; }
-        public List<string> Registros { get; set; }
     }
-
-}
 }
