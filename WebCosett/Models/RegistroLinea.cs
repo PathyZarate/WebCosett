@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
-namespace WebCosett.Data
+namespace WebCosett.Models
 {
     public class RegistroLinea
     {
@@ -14,8 +14,5 @@ namespace WebCosett.Data
         public string Hora { get; set; }
         public string Calidad { get; set; }
         public string LongitudDatos { get; set; }
-        public List<DatoRegistro> Registros { get; set; }
     }
-
-
 }

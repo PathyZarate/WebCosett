@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
-namespace WebCosett.Data
+namespace WebCosett.Models
 {
     public class DatoRegistro
     {
@@ -24,5 +24,4 @@ namespace WebCosett.Data
         public string Valor12 { get; set; }
         public string Valor13 { get; set; }
     }
-
 }

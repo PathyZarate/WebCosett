@@ -1,5 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using WebCosett.Models;
+using DocumentFormat.OpenXml.InkML;
+using System.Collections.Generic;
+using System.Reflection.Emit;
+
 
 namespace WebCosett.Data
 {
@@ -7,14 +12,8 @@ namespace WebCosett.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public DbSet<Archivo> Archivo { get; set; }
-        public DbSet<RegistroLinea> RegistroLinea { get; set; }
-        public DbSet<DatoRegistro> DatoRegistro { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-        }
-
+        public DbSet<Archivo> Archivos { get; set; }
+        public DbSet<RegistroLinea> RegistroLineas { get; set; }
+        public DbSet<DatoRegistro> DatoRegistros { get; set; }
     }
 }

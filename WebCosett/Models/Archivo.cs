@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebCosett.Data
+namespace WebCosett.Models
 {
     public class Archivo
     {
@@ -9,5 +9,4 @@ namespace WebCosett.Data
         public string Nombre { get; set; }
         public DateTime FechaSubida { get; set; } = DateTime.UtcNow;
     }
-
 }
